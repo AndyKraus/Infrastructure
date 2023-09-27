@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  libre-translate:
+    container_name: translation-service
+    image: libretranslate/libretranslate
+    restart: unless-stopped
+    command: --load-only de,en # use german and english language models only
+    ports:
+      - ${LIBRETRANSLATE_PORT}:${LIBRETRANSLATE_PORT}
+    networks:
+      - translation-network # transists to infrastructure_translation-network
+
+networks:
+  translation-network:
